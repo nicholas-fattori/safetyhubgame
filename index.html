@@ -1,0 +1,633 @@
+Ecco l'anteprima interattiva aggiornata del gioco **"Safety Hero: Hazard Hunter"**.
+
+Puoi testare e giocare con l'applicazione direttamente nella finestra dell'anteprima qui sotto:
+
+safety_hero.html [generated with web_code_canvas tool]
+
+---
+
+### Codice Sorgente Completo (`index.html`)
+
+Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un server della scuola:
+
+```html
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Hero: Hazard Hunter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@500;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff9900;
+            --primary-dark: #cc7a00;
+            --secondary: #00bcd4;
+            --danger: #ff3333;
+            --success: #00e676;
+            --dark: #121824;
+            --card-bg: rgba(18, 24, 36, 0.88);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* SCHERMATA LOGIN CON SFONDO SCUOLA FULL-SCREEN */
+        #login-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%237ec0ee"/><rect y="400" width="1200" height="200" fill="%23d8d0c5"/><rect x="150" y="150" width="900" height="250" fill="%23f9f6f0" stroke="%23333" stroke-width="4"/><polygon points="150,150 600,40 1050,150" fill="%23b84a39"/><rect x="450" y="70" width="300" height="80" fill="%23eee8dc" stroke="%23333" stroke-width="3"/><polygon points="450,70 600,25 750,70" fill="%238b0000"/><g fill="%231c3144"><rect x="200" y="190" width="50" height="80"/><rect x="290" y="190" width="50" height="80"/><rect x="380" y="190" width="50" height="80"/><rect x="480" y="180" width="60" height="90"/><rect x="660" y="180" width="60" height="90"/><rect x="770" y="190" width="50" height="80"/><rect x="860" y="190" width="50" height="80"/><rect x="950" y="190" width="50" height="80"/></g><g fill="%23ffffff" stroke="%23ccc" stroke-width="2"><rect x="170" y="300" width="220" height="100"/><rect x="810" y="300" width="220" height="100"/></g><rect x="540" y="290" width="120" height="110" fill="%235c4033"/><line x1="600" y1="120" x2="600" y2="40" stroke="%23333" stroke-width="4"/><rect x="600" y="40" width="30" height="15" fill="%23green"/><rect x="600" y="55" width="30" height="15" fill="%23white"/><rect x="600" y="70" width="30" height="15" fill="%23red"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .login-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 15, 26, 0.65);
+            backdrop-filter: blur(5px);
+        }
+
+        .card-panel {
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 0 30px rgba(255, 153, 0, 0.35);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+        }
+
+        .avatar-selector {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .avatar-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            background-size: cover;
+            transition: all 0.2s;
+        }
+
+        .avatar-option.selected {
+            border-color: var(--primary);
+            transform: scale(1.15);
+            box-shadow: 0 0 12px var(--primary);
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
+        }
+
+        /* GAME HUD & INTERFACE */
+        #game-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hud-top {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hud-box {
+            background: rgba(18, 24, 36, 0.85);
+            border: 1px solid var(--primary);
+            padding: 10px 18px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hud-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .hud-val {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* FUMETTO DIALOGO */
+        .comic-modal {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            padding: 20px;
+        }
+
+        .comic-box {
+            background: #fff;
+            color: #111;
+            width: 100%;
+            max-width: 550px;
+            border-radius: 20px;
+            border: 6px solid #000;
+            padding: 25px;
+            position: relative;
+            box-shadow: 12px 12px 0px #000;
+            animation: popup 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popup {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .comic-header {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comic-body {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .comic-badge {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .comic-btn {
+            background: #000;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            float: right;
+            transition: transform 0.1s;
+        }
+
+        .comic-btn:hover {
+            transform: scale(1.05);
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* CONTROLLI MOBILE TOUCH */
+        .touch-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: none;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .d-pad {
+            width: 130px;
+            height: 130px;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .d-btn {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            background: rgba(255,255,255,0.25);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .d-up { top: 0; left: 44px; }
+        .d-down { bottom: 0; left: 44px; }
+        .d-left { top: 44px; left: 0; }
+        .d-right { top: 44px; right: 0; }
+
+        .action-btn {
+            width: 75px;
+            height: 75px;
+            background: var(--primary);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            pointer-events: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .touch-controls { display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCHERMATA LOGIN CON SFONDO SCUOLA FULL-SCREEN -->
+    <div id="login-screen">
+        <div class="login-overlay"></div>
+        <div class="card-panel">
+            <h1>SAFETY HERO</h1>
+            <div class="subtitle">Simulatore di Sicurezza sul Lavoro per Studenti</div>
+            
+            <form id="player-form">
+                <div class="form-group">
+                    <label>Nome Studente / Giocatore</label>
+                    <input type="text" id="player-name" required placeholder="Es. Mario Rossi">
+                </div>
+
+                <div class="form-group">
+                    <label>Seleziona Avatar</label>
+                    <div class="avatar-selector">
+                        <div class="avatar-option selected" data-avatar="1" style="background:#00bcd4;"></div>
+                        <div class="avatar-option" data-avatar="2" style="background:#e91e63;"></div>
+                        <div class="avatar-option" data-avatar="3" style="background:#4caf50;"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-main">ENTRA NEL CANTIERE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CANVAS DI GIOCO 2D -->
+    <div id="game-container">
+        <div class="hud-top">
+            <div class="hud-box">
+                <div>
+                    <div class="hud-title">STUDENTE</div>
+                    <div class="hud-val" id="hud-name">Player</div>
+                </div>
+            </div>
+            <div class="hud-box">
+                <div>
+                    <div class="hud-title">LIVELLO</div>
+                    <div class="hud-val" id="hud-level">1 / 20</div>
+                </div>
+            </div>
+            <div class="hud-box">
+                <div>
+                    <div class="hud-title">PUNTEGGIO</div>
+                    <div class="hud-val" id="hud-score">0 XP</div>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- CONTROLLI MOBILE TOUCH -->
+        <div class="touch-controls">
+            <div class="d-pad">
+                <div class="d-btn d-up" id="btn-up">▲</div>
+                <div class="d-btn d-left" id="btn-left">◄</div>
+                <div class="d-btn d-right" id="btn-right">►</div>
+                <div class="d-btn d-down" id="btn-down">▼</div>
+            </div>
+            <div class="action-btn" id="btn-action">AZIONA</div>
+        </div>
+    </div>
+
+    <!-- MODALE FUMETTO RISCHI ED ERRORI -->
+    <div class="comic-modal" id="comic-modal">
+        <div class="comic-box">
+            <div class="comic-badge" id="comic-badge">INCIDENTE D.LGS 81/08</div>
+            <div class="comic-header" id="comic-title">TITOLO PERICOLO</div>
+            <div class="comic-body" id="comic-text">
+                Spiegazione dell'errore umano o della procedura di sicurezza corretta...
+            </div>
+            <button class="comic-btn" id="comic-close-btn">HO CAPITO!</button>
+        </div>
+    </div>
+
+    <script>
+        const LEVELS = [
+            { id: 1, env: 'officina', title: 'Mola da Banco & Protezioni', target: 'Mola Senza Schermo', choice: 'Indossa Occhiali DPI e attiva lo schermo protettivo', xp: 100, hazard: 'Schegge negli occhi e contatto improprio con organo rotante.' },
+            { id: 2, env: 'officina', title: 'Procedura LOTO su Monoblocco', target: 'Fresatrice CNC in Tensione', choice: 'Applica il blocco LOTO (Lockout/Tagout)', xp: 100, hazard: 'Avvio accidentale del macchinario durante la manutenzione.' },
+            { id: 3, env: 'officina', title: 'Abbigliamento da Lavoro', target: 'Tornio Meccanico', choice: 'Raccogli i capelli e chiudi le maniche ampie', xp: 100, hazard: 'Impigliamento degli abiti nell organo di trasmissione.' },
+            { id: 4, env: 'officina', title: 'Fotocellule della Pressa', target: 'Barriera Ottica Disattivata', choice: 'Ripristina il funzionamento delle fotocellule', xp: 100, hazard: 'Schiacciamento e amputazione degli arti superiori.' },
+
+            { id: 5, env: 'elettrico', title: 'Arc Flash & Guanti Isolanti', target: 'Quadri ad Alta Tensione', choice: 'Indossa guanti dielettrici isolanti di Classe 00', xp: 120, hazard: 'Fiammata da arco elettrico ed ustioni da fulminazione.' },
+            { id: 6, env: 'elettrico', title: 'Conduttività Liquidi', target: 'Chiazza d Acqua a Terra', choice: 'Elimina l umidità prima di accedere alle barre', xp: 120, hazard: 'Elettrocuzione diretta dovuta alla conduzione dell acqua.' },
+            { id: 7, env: 'elettrico', title: 'Cavi Sfilacciati', target: 'Prolunga Cantiere Danneggiata', choice: 'Sostituisci il cavo con connettore IP67 a norma', xp: 120, hazard: 'Contatto indiretto con rame in tensione.' },
+            { id: 8, env: 'elettrico', title: 'Messa a Terra Impianto', target: 'Dispersore Scollegato', choice: 'Riconnetti il cavo giallo-verde di terra', xp: 120, hazard: 'Mancata dispersione delle correnti di guasto verso terra.' },
+
+            { id: 9, env: 'cantiere', title: 'Lavori in Quota & Linea Vita', target: 'Struttura Ponteggio', choice: 'Aggancia il moschettone dell imbracatura alla linea di vita', xp: 150, hazard: 'Caduta da quota superiore a 2 metri senza protezione.' },
+            { id: 10, env: 'cantiere', title: 'Caduta Oggetti dall Alto', target: 'Zona Sottostante ai Piani', choice: 'Indossa l elmetto protettivo EN 397', xp: 150, hazard: 'Trauma cranico per impatto con materiali o attrezzi caduti.' },
+            { id: 11, env: 'cantiere', title: 'Parapetti e Fermapiede', target: 'Bordo Sovraelevato Scuoperto', choice: 'Monta il parapetto regolamentare a tre elementi', xp: 150, hazard: 'Scivolamento e caduta nel vuoto.' },
+            { id: 12, env: 'cantiere', title: 'Manovra Mezzi Pesanti', target: 'Zona Scavo Scavatore', choice: 'Mantieni il contatto visivo con il manovratore', xp: 150, hazard: 'Investimento e schiacciamento negli angoli ciechi dei mezzi.' },
+
+            { id: 13, env: 'logistica', title: 'Cintura su Carrello Elevatore', target: 'Posto Guida Muletto', choice: 'Allaccia la cintura di sicurezza anti-ribaltamento', xp: 130, hazard: 'Schiacciamento sotto il muletto in caso di sbilanciamento.' },
+            { id: 14, env: 'logistica', title: 'Stoccaggio Pallet Instabili', target: 'Scaffalature Magazzino', choice: 'Risistema il carico e stabilizza i bancali in alto', xp: 130, hazard: 'Crollo delle merci sulle corsie di passaggio.' },
+            { id: 15, env: 'logistica', title: 'Ergonomia Carichi (MMC)', target: 'Pacco Pesante a Terra', choice: 'Piega le ginocchia e mantieni il carico vicino al busto', xp: 130, hazard: 'Lesioni dorsolombari e discopatie acuto-croniche.' },
+            { id: 16, env: 'logistica', title: 'Uscite di Emergenza', target: 'Porta di Evacuazione', choice: 'Sgombra le scatole dalla via di fuga', xp: 130, hazard: 'Ostacolo e blocco durante l evacuazione d emergenza.' },
+
+            { id: 17, env: 'chimico', title: 'Cappa Aspirazione Fumi', target: 'Postazione Reagenti Volatili', choice: 'Attiva la cappa d aspirazione forzata', xp: 140, hazard: 'Inalazione di sostanze tossiche o nocive.' },
+            { id: 18, env: 'chimico', title: 'Schedes di Sicurezza (SDS)', target: 'Flacone Privo di Pittogrammi', choice: 'Consulta la SDS per verificare la reattività chimica', xp: 140, hazard: 'Reazioni esotermiche ed incompatibilità chimiche violente.' },
+            { id: 19, env: 'chimico', title: 'Bombole Gas Compressi', target: 'Bombola d Azoto Libera', choice: 'Fissa la bombola con la catena al carrello metallico', xp: 140, hazard: 'Rottura valvola ed effetto missile ad alta pressione.' },
+            { id: 20, env: 'chimico', title: 'Estintore Idoneo su Elettrico', target: 'Incendio su Quadro Elettrico', choice: 'Utilizza l estintore a CO2 (Diossido di Carbonio)', xp: 200, hazard: 'Elettrocuzione da conducibilità impiegando estintori ad acqua.' }
+        ];
+
+        let player = { name: '', avatar: 1, x: 200, y: 300, level: 1, score: 0, dir: 'down' };
+        let keys = {};
+        let canvas, ctx;
+
+        window.onload = () => {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+
+            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('keydown', e => keys[e.key] = true);
+            window.addEventListener('keyup', e => keys[e.key] = false);
+
+            document.querySelectorAll('.avatar-option').forEach(el => {
+                el.addEventListener('click', () => {
+                    document.querySelectorAll('.avatar-option').forEach(a => a.classList.remove('selected'));
+                    el.classList.add('selected');
+                    player.avatar = el.dataset.avatar;
+                });
+            });
+
+            document.getElementById('player-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                player.name = document.getElementById('player-name').value || 'Studente';
+                document.getElementById('hud-name').innerText = player.name;
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('game-container').style.display = 'block';
+                gameLoop();
+            });
+
+            document.getElementById('comic-close-btn').addEventListener('click', () => {
+                document.getElementById('comic-modal').style.display = 'none';
+                nextLevel();
+            });
+        };
+
+        function resizeCanvas() {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        }
+
+        function gameLoop() {
+            update();
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function update() {
+            const speed = 5;
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) { player.y -= speed; player.dir = 'up'; }
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) { player.y += speed; player.dir = 'down'; }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) { player.x -= speed; player.dir = 'left'; }
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) { player.x += speed; player.dir = 'right'; }
+
+            player.x = Math.max(50, Math.min(canvas.width - 50, player.x));
+            player.y = Math.max(50, Math.min(canvas.height - 50, player.y));
+
+            const targetX = canvas.width / 2;
+            const targetY = canvas.height / 2;
+            const dist = Math.hypot(player.x - targetX, player.y - targetY);
+
+            if ((dist < 60 && keys[' ']) || (dist < 60 && keys['e'])) {
+                triggerInteraction();
+            }
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const currentLvl = LEVELS[player.level - 1];
+
+            drawEnvironment(currentLvl.env);
+
+            const targetX = canvas.width / 2;
+            const targetY = canvas.height / 2;
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(targetX, targetY, 45 + Math.sin(Date.now() / 150) * 5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 153, 0, 0.35)';
+            ctx.fill();
+            ctx.strokeStyle = '#ff9900';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 16px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(currentLvl.target, targetX, targetY - 60);
+            ctx.fillText("PREMI SPAZIO PER INTERAGIRE", targetX, targetY + 75);
+            ctx.restore();
+
+            drawPlayer(player.x, player.y, player.dir);
+        }
+
+        function drawEnvironment(env) {
+            ctx.fillStyle = '#1c2430';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 2;
+            for (let x = 0; x < canvas.width; x += 60) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 60) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+        }
+
+        function drawPlayer(x, y, dir) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            ctx.beginPath();
+            ctx.ellipse(0, 22, 18, 8, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.fill();
+
+            ctx.fillStyle = player.avatar == 1 ? '#00bcd4' : (player.avatar == 2 ? '#e91e63' : '#4caf50');
+            ctx.beginPath();
+            ctx.arc(0, 0, 18, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.fillStyle = '#ffcc00';
+            ctx.beginPath();
+            ctx.arc(0, -2, 13, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#000';
+            if (dir === 'up') ctx.fillRect(-4, -12, 8, 4);
+            if (dir === 'down') ctx.fillRect(-4, 4, 8, 4);
+            if (dir === 'left') ctx.fillRect(-12, -4, 4, 8);
+            if (dir === 'right') ctx.fillRect(8, -4, 4, 8);
+
+            ctx.restore();
+        }
+
+        function triggerInteraction() {
+            const currentLvl = LEVELS[player.level - 1];
+            document.getElementById('comic-title').innerText = currentLvl.title;
+            document.getElementById('comic-text').innerHTML = `
+                <strong>PERICOLO IDENTIFICATO:</strong> ${currentLvl.hazard}<br><br>
+                <strong>AZIONI DI SICUREZZA:</strong> ${currentLvl.choice}<br><br>
+                <em>Conforme alle direttive D.Lgs 81/08 sulla prevenzione negli ambienti di lavoro.</em>
+            `;
+            document.getElementById('comic-modal').style.display = 'flex';
+        }
+
+        function nextLevel() {
+            player.score += LEVELS[player.level - 1].xp;
+            document.getElementById('hud-score').innerText = player.score + ' XP';
+
+            if (player.level < 20) {
+                player.level++;
+                document.getElementById('hud-level').innerText = player.level + ' / 20';
+                player.x = 120;
+                player.y = 120;
+            } else {
+                alert(`COMPLIMENTI ${player.name}! Hai completato con successo tutti i 20 livelli di sicurezza! Score Finale: ${player.score} XP`);
+            }
+        }
+    </script>
+</body>
+</html>
+
+```
