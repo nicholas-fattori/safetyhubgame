@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Hub - Istituto Sartori-Rosselli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@500;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff9900;
+            --primary-dark: #cc7a00;
+            --secondary: #00bcd4;
+            --danger: #ff3333;
+            --success: #00e676;
+            --dark: #0d1117;
+            --card-bg: rgba(13, 17, 23, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* LOGIN SCREEN WITH FULL-SCREEN SCHOOL BACKGROUND */
+        #login-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%235a8f9c"/><rect y="380" width="1200" height="220" fill="%23b0a898"/><rect x="120" y="140" width="960" height="260" fill="%23f3efe6" stroke="%23222" stroke-width="5"/><polygon points="120,140 600,30 1080,140" fill="%239e3b2b"/><rect x="440" y="60" width="320" height="80" fill="%23e5dec9" stroke="%23222" stroke-width="4"/><polygon points="440,60 600,15 760,60" fill="%236e1a1a"/><g fill="%231a2634"><rect x="170" y="180" width="60" height="90"/><rect x="270" y="180" width="60" height="90"/><rect x="370" y="180" width="60" height="90"/><rect x="470" y="170" width="70" height="100"/><rect x="660" y="170" width="70" height="100"/><rect x="770" y="180" width="60" height="90"/><rect x="870" y="180" width="60" height="90"/><rect x="970" y="180" width="60" height="90"/></g><g fill="%23ffffff" stroke="%23bbb" stroke-width="3"><rect x="180" y="290" width="220" height="110"/><rect x="800" y="290" width="220" height="110"/></g><rect x="535" y="270" width="130" height="130" fill="%234a3326"/><line x1="600" y1="110" x2="600" y2="30" stroke="%23222" stroke-width="4"/><rect x="600" y="30" width="35" height="15" fill="%23009246"/><rect x="600" y="45" width="35" height="15" fill="%23ffffff"/><rect x="600" y="60" width="35" height="15" fill="%23ce2b37"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .login-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 15, 26, 0.78);
+            backdrop-filter: blur(8px);
+        }
+
+        .card-panel {
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 35px 30px;
+            width: 92%;
+            max-width: 520px;
+            box-shadow: 0 0 35px rgba(255, 153, 0, 0.4);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 153, 0, 0.7);
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #4dd0e1;
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(255, 153, 0, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .avatar-selector {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .avatar-option {
+            flex: 1;
+            padding: 10px 5px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .avatar-option.selected {
+            border-color: var(--primary);
+            background: rgba(255, 153, 0, 0.18);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
+        }
+
+        .avatar-svg-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .avatar-name {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(255, 153, 0, 0.6);
+        }
+
+        /* GAME HUD STRUCTURE */
+        #game-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* NEW INTEGRATED HUD BAR - NO OVERLAPPING */
+        .hud-top {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hud-group-left, .hud-group-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hud-box {
+            background: rgba(13, 17, 23, 0.9);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .hud-box.sector-box {
+            border-color: var(--secondary);
+            background: rgba(0, 188, 212, 0.12);
+        }
+
+        .hud-box.gems-box {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.12);
+        }
+
+        .hud-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hud-val {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .hud-val.gems-val {
+            color: #ffd700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+        .health-bar-bg {
+            width: 110px;
+            height: 12px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 3px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--success);
+            transition: width 0.3s ease;
+        }
+
+        /* COMIC MODAL */
+        .comic-modal {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            padding: 20px;
+        }
+
+        .comic-box {
+            background: #fff;
+            color: #111;
+            width: 100%;
+            max-width: 580px;
+            border-radius: 20px;
+            border: 6px solid #000;
+            padding: 25px;
+            position: relative;
+            box-shadow: 12px 12px 0px #000;
+            animation: popup 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popup {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .comic-header {
+            font-family: 'Bangers', cursive;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .comic-body {
+            font-size: 1.05rem;
+            line-height: 1.55;
+            margin-bottom: 22px;
+            color: #222;
+        }
+
+        .comic-badge {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            font-size: 0.82rem;
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comic-btn {
+            background: #000;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            padding: 10px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            float: right;
+            transition: transform 0.15s, background-color 0.15s;
+            box-shadow: 4px 4px 0px #888;
+        }
+
+        .comic-btn:hover {
+            transform: scale(1.05);
+            background: var(--primary);
+            color: #000;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        /* TOUCH CONTROLS */
+        .touch-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: none;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .d-pad {
+            width: 130px;
+            height: 130px;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .d-btn {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            background: rgba(255,255,255,0.25);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #fff;
+            touch-action: manipulation;
+        }
+
+        .d-up { top: 0; left: 44px; }
+        .d-down { bottom: 0; left: 44px; }
+        .d-left { top: 44px; left: 0; }
+        .d-right { top: 44px; right: 0; }
+
+        .action-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            pointer-events: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 768px) {
+            .touch-controls { display: flex; }
+            .hud-top { gap: 8px; }
+            .hud-box { padding: 6px 10px; }
+            .health-bar-bg { width: 80px; }
+            h1 { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCHERMATA LOGIN -->
+    <div id="login-screen">
+        <div class="login-overlay"></div>
+        <div class="card-panel">
+            <h1>SAFETY HUB</h1>
+            <div class="subtitle">Esplora l'Istituto Sartori-Rosselli e diventa il migliore</div>
+            
+            <form id="player-form">
+                <div class="form-group">
+                    <label>Nome Studente</label>
+                    <input type="text" id="player-name" required placeholder="Inserisci il tuo nome">
+                </div>
+
+                <div class="form-group">
+                    <label>Seleziona Avatar Workwear</label>
+                    <div class="avatar-selector">
+                        
+                        <!-- Avatar 1: Operaio Cantiere (Gilet & Casco Giallo) -->
+                        <div class="avatar-option selected" data-avatar="1">
+                            <div class="avatar-svg-container">
+                                <svg width="32" height="32" viewBox="0 0 40 40">
+                                    <circle cx="20" cy="16" r="8" fill="#ffdbac"/>
+                                    <path d="M10,16 Q20,6 30,16 Z" fill="#ffd600"/>
+                                    <rect x="8" y="15" width="24" height="3" fill="#ffab00" rx="1"/>
+                                    <path d="M12,25 L28,25 L30,38 L10,38 Z" fill="#ff6f00"/>
+                                    <rect x="14" y="25" width="3" height="13" fill="#ffffff"/>
+                                    <rect x="23" y="25" width="3" height="13" fill="#ffffff"/>
+                                </svg>
+                            </div>
+                            <span class="avatar-name">Operaio</span>
+                        </div>
+
+                        <!-- Avatar 2: Tecnico Laboratorio (Camice/Tuta Azzurra) -->
+                        <div class="avatar-option" data-avatar="2">
+                            <div class="avatar-svg-container">
+                                <svg width="32" height="32" viewBox="0 0 40 40">
+                                    <circle cx="20" cy="16" r="8" fill="#f5d0a9"/>
+                                    <path d="M11,15 Q20,8 29,15 Z" fill="#00bcd4"/>
+                                    <path d="M12,25 L28,25 L30,38 L10,38 Z" fill="#00acc1"/>
+                                    <rect x="18" y="25" width="4" height="13" fill="#ffffff"/>
+                                    <circle cx="20" cy="14" r="5" fill="none" stroke="#fff" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <span class="avatar-name">Tecnico</span>
+                        </div>
+
+                        <!-- Avatar 3: Manutentore (Tuta Blu / Casco Bianco) -->
+                        <div class="avatar-option" data-avatar="3">
+                            <div class="avatar-svg-container">
+                                <svg width="32" height="32" viewBox="0 0 40 40">
+                                    <circle cx="20" cy="16" r="8" fill="#e0ac69"/>
+                                    <path d="M10,16 Q20,6 30,16 Z" fill="#ffffff"/>
+                                    <rect x="8" y="15" width="24" height="3" fill="#e0e0e0" rx="1"/>
+                                    <path d="M12,25 L28,25 L30,38 L10,38 Z" fill="#1e88e5"/>
+                                    <rect x="10" y="30" width="20" height="3" fill="#ffd600"/>
+                                </svg>
+                            </div>
+                            <span class="avatar-name">Manutentore</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-main">INIZIA ISPEZIONE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CANVAS E GIOCO -->
+    <div id="game-container">
+        
+        <!-- HUD RIDISEGNATO SENZA SOVRAPPOSIZIONI -->
+        <div class="hud-top">
+            <div class="hud-group-left">
+                <div class="hud-box">
+                    <div>
+                        <div class="hud-title">STUDENTE</div>
+                        <div class="hud-val" id="hud-name">Studente</div>
+                    </div>
+                </div>
+
+                <div class="hud-box sector-box">
+                    <div>
+                        <div class="hud-title">SETTORE REALE</div>
+                        <div class="hud-val" id="hud-sector-title">Officina (1/20)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hud-group-right">
+                <div class="hud-box">
+                    <div>
+                        <div class="hud-title">SALUTE (HP)</div>
+                        <div class="health-bar-bg">
+                            <div class="health-bar-fill" id="hud-hp"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hud-box gems-box">
+                    <div>
+                        <div class="hud-title">GEMME SICUREZZA</div>
+                        <div class="hud-val gems-val" id="hud-score">💎 0 / 20</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- TOUCH CONTROLS -->
+        <div class="touch-controls">
+            <div class="d-pad">
+                <div class="d-btn d-up" id="btn-up">▲</div>
+                <div class="d-btn d-left" id="btn-left">◄</div>
+                <div class="d-btn d-right" id="btn-right">►</div>
+                <div class="d-btn d-down" id="btn-down">▼</div>
+            </div>
+            <div class="action-btn" id="btn-action">VERIFICA</div>
+        </div>
+    </div>
+
+    <!-- MODALE FUMETTO ESITO -->
+    <div class="comic-modal" id="comic-modal">
+        <div class="comic-box">
+            <div class="comic-badge" id="comic-badge">VALUTAZIONE RISCHIO</div>
+            <div class="comic-header" id="comic-title">TITOLO ESITO</div>
+            <div class="comic-body" id="comic-text">
+                Descrizione dell'errore o della best practice applicata...
+            </div>
+            <button class="comic-btn" id="comic-close-btn">CONTINUA</button>
+        </div>
+    </div>
+
+    <script>
+        // 20 Livelli Tematici d.lgs 81/08
+        const LEVELS = [
+            { id: 1, env: 'officina', name: 'Officina: Smerigliatrice', hazardType: 'sparks', badText: 'ERRORE: Hai avviato la mola senza schermi e senza occhiali protettivi! Scheggia negli occhi (-25 HP).', goodText: 'CORRETTO: Hai indossato gli occhiali DPI e abbassato il paraschegge trasparente. +1 Gemma!', gems: 1 },
+            { id: 2, env: 'officina', name: 'Officina: Manutenzione CNC', hazardType: 'movingParts', badText: 'ERRORE: Sei entrato nell area macchinario senza blocco LOTO! Avvio accidentale organo mobile (-30 HP).', goodText: 'CORRETTO: Hai applicato la procedura LOTO (Lockout/Tagout) bloccando le fonti di energia. +1 Gemma!', gems: 1 },
+            { id: 3, env: 'officina', name: 'Officina: Tornio Meccanico', hazardType: 'sparks', badText: 'ERRORE: Bracciali e maniche larghe vicine al mandrino in rotazione! Pericolo trascinamento (-20 HP).', goodText: 'CORRETTO: Hai assicurato gli abiti da lavoro ed allacciato i manichetti a norma. +1 Gemma!', gems: 1 },
+            { id: 4, env: 'officina', name: 'Officina: Pressa Oleodinamica', hazardType: 'movingParts', badText: 'ERRORE: Hai bypassato le barriere fotoelettriche di sicurezza! Rischio schiacciamento (-35 HP).', goodText: 'CORRETTO: Hai ripristinato i sensori ottici della barriera di protezione. +1 Gemma!', gems: 1 },
+
+            { id: 5, env: 'elettrico', name: 'Lab Elettrico: Quadro AT', hazardType: 'arcFlash', badText: 'ERRORE: Intervento a mani nude su barre isolate! Arco elettrico imprevisto (-40 HP).', goodText: 'CORRETTO: Hai indossato guanti isolanti dielettrici Classe 0 e visiera di protezione. +1 Gemma!', gems: 1 },
+            { id: 6, env: 'elettrico', name: 'Lab Elettrico: Umidità Cabina', hazardType: 'arcFlash', badText: 'ERRORE: Camminato su ristagno d acqua vicino al trasformatore! Elettrocuzione (-30 HP).', goodText: 'CORRETTO: Hai asciugato la zona ed utilizzato pedane isolanti in gomma. +1 Gemma!', gems: 1 },
+            { id: 7, env: 'elettrico', name: 'Lab Elettrico: Cavi Scoperti', hazardType: 'sparks', badText: 'ERRORE: Presa un cavo con guarnizione in rame scoperta! Shock elettrico (-25 HP).', goodText: 'CORRETTO: Hai isolato la linea e sostituito la prolunga con connettore IP67. +1 Gemma!', gems: 1 },
+            { id: 8, env: 'elettrico', name: 'Lab Elettrico: Impianto Terra', hazardType: 'arcFlash', badText: 'ERRORE: Nodo di terra scollegato durante la misurazione! Scossa diretta (-30 HP).', goodText: 'CORRETTO: Hai riconnesso la palina di rame dell impianto di dispersione a terra. +1 Gemma!', gems: 1 },
+
+            { id: 9, env: 'cantiere', name: 'Cantiere: Lavori in Quota', hazardType: 'debris', badText: 'ERRORE: Spostamento sul ponteggio senza linea di vita agganciata! Caduta sfiorata (-35 HP).', goodText: 'CORRETTO: Hai agganciato il doppio moschettone dell imbracatura alla linea di vita. +1 Gemma!', gems: 1 },
+            { id: 10, env: 'cantiere', name: 'Cantiere: Caduta Materiali', hazardType: 'debris', badText: 'ERRORE: Attraversata area sotto carico sospeso senza elmetto! Impatto detrito (-30 HP).', goodText: 'CORRETTO: Hai indossato l elmetto EN 397 e delimitato l area di tiro. +1 Gemma!', gems: 1 },
+            { id: 11, env: 'cantiere', name: 'Cantiere: Bordo Scavo', hazardType: 'debris', badText: 'ERRORE: Avvicinato al bordo non protetto dello scavo! Scivolamento nel vuoto (-25 HP).', goodText: 'CORRETTO: Hai installato il parapetto rigido a tre elementi con tavola fermapiede. +1 Gemma!', gems: 1 },
+            { id: 12, env: 'cantiere', name: 'Cantiere: Manovra Mezzi', hazardType: 'movingParts', badText: 'ERRORE: Camminato nell angolo cieco dello scavatore in movimento! Rischio investimento (-40 HP).', goodText: 'CORRETTO: Hai stabilito contatto visivo col manovratore e indossato gilet HV. +1 Gemma!', gems: 1 },
+
+            { id: 13, env: 'logistica', name: 'Magazzino: Muletto Elevatore', hazardType: 'forklift', badText: 'ERRORE: Guidato il muletto senza cintura di sicurezza! Ribaltamento laterale (-35 HP).', goodText: 'CORRETTO: Hai allacciato la cintura di trattenuta ed azionato il lampeggiante. +1 Gemma!', gems: 1 },
+            { id: 14, env: 'logistica', name: 'Magazzino: Carichi Scaffali', hazardType: 'debris', badText: 'ERRORE: Prelevato scatola in basso sbilanciando bancale in quota! Crollo merce (-30 HP).', goodText: 'CORRETTO: Hai messo in sicurezza gli scaffali multilivello e filmato il pallet. +1 Gemma!', gems: 1 },
+            { id: 15, env: 'logistica', name: 'Magazzino: MMC Carichi', hazardType: 'movingParts', badText: 'ERRORE: Sollevato carico da 30kg a schiena curva! Trauma alla colonna (-20 HP).', goodText: 'CORRETTO: Hai piegato le ginocchia mantenendo il peso vicino al baricentro. +1 Gemma!', gems: 1 },
+            { id: 16, env: 'logistica', name: 'Magazzino: Via d Emergenza', hazardType: 'forklift', badText: 'ERRORE: Accumulato bancali davanti alla porta antincendio! Blocco via di fuga (-25 HP).', goodText: 'CORRETTO: Hai rimosso ogni ostacolo liberando la porta ad apertura a spinta. +1 Gemma!', gems: 1 },
+
+            { id: 17, env: 'chimico', name: 'Lab Chimico: Reagenti Volatili', hazardType: 'fumes', badText: 'ERRORE: Aperto flacone di solvente fuori dalla cappa! Inalazione vapori tossici (-30 HP).', goodText: 'CORRETTO: Hai attivato la cappa aspirante forzata e lavorato sotto il saliscendi. +1 Gemma!', gems: 1 },
+            { id: 18, env: 'chimico', name: 'Lab Chimico: Travaso Sostanze', hazardType: 'fumes', badText: 'ERRORE: Travaso chimico senza consultare la Scheda di Sicurezza SDS! Reazione violenta (-35 HP).', goodText: 'CORRETTO: Hai verificato i pittogrammi CLP e la compatibilità dei prodotti. +1 Gemma!', gems: 1 },
+            { id: 19, env: 'chimico', name: 'Lab Chimico: Bombole Gas', hazardType: 'sparks', badText: 'ERRORE: Spostata bombola d azoto sfilandola dalla catena di blocco! Rischio caduta (-25 HP).', goodText: 'CORRETTO: Hai fissato saldamente la bombola al carrello con catenella metallica. +1 Gemma!', gems: 1 },
+            { id: 20, env: 'chimico', name: 'Lab Chimico: Principio Incendio', hazardType: 'sparks', badText: 'ERRORE: Usato estintore ad acqua su quadro in tensione! Rischio folgorazione (-50 HP).', goodText: 'CORRETTO: Hai impiegato l estintore a CO2 idoneo per apparati elettrici. +1 Gemma!', gems: 1 }
+        ];
+
+        let player = { 
+            name: '', 
+            avatar: '1', 
+            x: 120, 
+            y: 300, 
+            level: 1, 
+            gems: 0, 
+            hp: 100, 
+            dir: 'down', 
+            animFrame: 0 
+        };
+
+        let keys = {};
+        let touchState = { up: false, down: false, left: false, right: false, action: false };
+        let projectiles = [];
+        let canvas, ctx;
+        let isLevelPassed = false;
+        let isModalOpen = false;
+        let redZoneCooldown = false; // Evita loop continuo quando si tocca la zona rossa
+
+        window.onload = () => {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Tastiera
+            window.addEventListener('keydown', e => { keys[e.key] = true; });
+            window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+            // Touch Controls per Mobile
+            setupTouchEvents();
+
+            // Selezione Avatar nel Form
+            document.querySelectorAll('.avatar-option').forEach(el => {
+                el.addEventListener('click', () => {
+                    document.querySelectorAll('.avatar-option').forEach(a => a.classList.remove('selected'));
+                    el.classList.add('selected');
+                    player.avatar = el.dataset.avatar;
+                });
+            });
+
+            // Invio Form Login
+            document.getElementById('player-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                player.name = document.getElementById('player-name').value.trim() || 'Studente Sartori-Rosselli';
+                document.getElementById('hud-name').innerText = player.name;
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('game-container').style.display = 'block';
+                initLevel();
+                requestAnimationFrame(gameLoop);
+            });
+
+            // Pulsante Modale Fumetto
+            document.getElementById('comic-close-btn').addEventListener('click', () => {
+                document.getElementById('comic-modal').style.display = 'none';
+                isModalOpen = false;
+                if (isLevelPassed) {
+                    nextLevel();
+                }
+            });
+        };
+
+        function setupTouchEvents() {
+            const bindBtn = (id, key) => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                btn.addEventListener('touchstart', (e) => { e.preventDefault(); touchState[key] = true; });
+                btn.addEventListener('touchend', (e) => { e.preventDefault(); touchState[key] = false; });
+            };
+            bindBtn('btn-up', 'up');
+            bindBtn('btn-down', 'down');
+            bindBtn('btn-left', 'left');
+            bindBtn('btn-right', 'right');
+            bindBtn('btn-action', 'action');
+        }
+
+        function resizeCanvas() {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        }
+
+        function initLevel() {
+            isLevelPassed = false;
+            redZoneCooldown = false;
+            projectiles = [];
+            player.x = 120;
+            player.y = canvas.height / 2;
+
+            const lvl = LEVELS[player.level - 1];
+            
+            // Aggiorna HUD Settore
+            document.getElementById('hud-sector-title').innerText = `${lvl.name} (${player.level}/20)`;
+
+            // Genera ostacoli in movimento per il settore
+            for (let i = 0; i < 4; i++) {
+                projectiles.push({
+                    x: Math.random() * (canvas.width - 350) + 250,
+                    y: Math.random() * (canvas.height - 250) + 120,
+                    vx: (Math.random() - 0.5) * 3.5,
+                    vy: (Math.random() - 0.5) * 3.5,
+                    type: lvl.hazardType
+                });
+            }
+        }
+
+        function gameLoop() {
+            if (!isModalOpen) {
+                update();
+            }
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function update() {
+            let moving = false;
+            const speed = 4.8;
+
+            // Movimenti (Tastiera + Touch)
+            if (keys['ArrowUp'] || keys['w'] || keys['W'] || touchState.up) { player.y -= speed; player.dir = 'up'; moving = true; }
+            if (keys['ArrowDown'] || keys['s'] || keys['S'] || touchState.down) { player.y += speed; player.dir = 'down'; moving = true; }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A'] || touchState.left) { player.x -= speed; player.dir = 'left'; moving = true; }
+            if (keys['ArrowRight'] || keys['d'] || keys['D'] || touchState.right) { player.x += speed; player.dir = 'right'; moving = true; }
+
+            if (moving) player.animFrame += 0.2;
+
+            // Limiti mappa
+            player.x = Math.max(50, Math.min(canvas.width - 50, player.x));
+            player.y = Math.max(100, Math.min(canvas.height - 50, player.y));
+
+            // Collisioni Proiettili/Pericoli in movimento
+            projectiles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 100 || p.x > canvas.width - 100) p.vx *= -1;
+                if (p.y < 120 || p.y > canvas.height - 80) p.vy *= -1;
+
+                const dist = Math.hypot(player.x - p.x, player.y - p.y);
+                if (dist < 26) {
+                    player.hp = Math.max(0, player.hp - 0.3);
+                    updateHPBar();
+                }
+            });
+
+            // Target Points
+            const badTargetX = canvas.width / 2 - 140;
+            const goodTargetX = canvas.width / 2 + 140;
+            const targetY = canvas.height / 2;
+
+            const distBad = Math.hypot(player.x - badTargetX, player.y - targetY);
+            const distGood = Math.hypot(player.x - goodTargetX, player.y - targetY);
+
+            // REQUISITO 5: ZONA ROSSA SI APRE AUTOMATICAMENTE SE CI PASSI SOPRA
+            if (distBad < 45 && !redZoneCooldown) {
+                triggerResult(false);
+            } else if (distBad >= 55) {
+                redZoneCooldown = false; // Reset cooldown quando ci si allontana
+            }
+
+            // REQUISITO 5: ZONA VERDE RICHIEDE CLICK / SPAZIO / TASTO E
+            const isActionPressed = keys[' '] || keys['e'] || keys['E'] || touchState.action;
+            if (distGood < 45 && isActionPressed) {
+                triggerResult(true);
+                touchState.action = false;
+                keys[' '] = false;
+                keys['e'] = false;
+            }
+        }
+
+        function updateHPBar() {
+            const bar = document.getElementById('hud-hp');
+            bar.style.width = player.hp + '%';
+            if (player.hp < 30) bar.style.background = 'var(--danger)';
+            else if (player.hp < 60) bar.style.background = 'var(--primary)';
+            else bar.style.background = 'var(--success)';
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const currentLvl = LEVELS[player.level - 1];
+
+            drawEnvironmentBackground(currentLvl.env);
+
+            projectiles.forEach(p => drawHazardProjectile(p));
+
+            const badTargetX = canvas.width / 2 - 140;
+            const goodTargetX = canvas.width / 2 + 140;
+            const targetY = canvas.height / 2;
+
+            // Target Rosso (Automatico al passaggio)
+            drawInteractPoint(badTargetX, targetY, '#ff3333', '🔴 PRATICA ERRATA', 'PASSA SOPRA PER VERIFICARE');
+            
+            // Target Verde (Richiede azione)
+            drawInteractPoint(goodTargetX, targetY, '#00e676', '🟢 BEST PRACTICE (81/08)', 'PREMI SPAZIO / AZIONA');
+
+            drawSelectedPlayer(player.x, player.y, player.dir, player.animFrame, player.avatar);
+        }
+
+        function drawInteractPoint(x, y, color, label, subtext) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, 32 + Math.sin(Date.now() / 250) * 4, 0, Math.PI * 2);
+            ctx.fillStyle = color + '22';
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(x, y, 14, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 13px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, x, y - 45);
+            ctx.font = '10px Roboto';
+            ctx.fillStyle = '#bbb';
+            ctx.fillText(subtext, x, y + 48);
+            ctx.restore();
+        }
+
+        function drawHazardProjectile(p) {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            if (p.type === 'sparks') {
+                ctx.fillStyle = '#ff9900';
+                ctx.beginPath(); ctx.arc(0, 0, 8, 0, Math.PI * 2); ctx.fill();
+            } else if (p.type === 'arcFlash') {
+                ctx.fillStyle = '#00bcd4';
+                ctx.beginPath(); ctx.arc(0, 0, 10, 0, Math.PI * 2); ctx.fill();
+            } else if (p.type === 'fumes') {
+                ctx.fillStyle = 'rgba(156, 39, 176, 0.7)';
+                ctx.beginPath(); ctx.arc(0, 0, 14, 0, Math.PI * 2); ctx.fill();
+            } else {
+                ctx.fillStyle = '#ff5722';
+                ctx.fillRect(-8, -8, 16, 16);
+            }
+            ctx.restore();
+        }
+
+        function drawSelectedPlayer(x, y, dir, anim, avatarType) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // Ombra
+            ctx.beginPath();
+            ctx.ellipse(0, 32, 16, 6, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.45)';
+            ctx.fill();
+
+            // Animazione Gambe
+            const legOffset = Math.sin(anim) * 7;
+            ctx.strokeStyle = avatarType === '2' ? '#00838f' : '#1a237e';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(-5, 10); ctx.lineTo(-5 + legOffset, 30);
+            ctx.moveTo(5, 10); ctx.lineTo(5 - legOffset, 30);
+            ctx.stroke();
+
+            // Busto in base all'Avatar selezionato
+            if (avatarType === '1') {
+                // Operaio Cantiere (Arancione Catarifrangente)
+                ctx.fillStyle = '#ff6f00';
+                ctx.fillRect(-12, -10, 24, 22);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(-12, -4, 24, 4);
+            } else if (avatarType === '2') {
+                // Tecnico Laboratorio (Camice Azzurro)
+                ctx.fillStyle = '#00acc1';
+                ctx.fillRect(-12, -10, 24, 22);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(-2, -10, 4, 22);
+            } else {
+                // Manutentore (Tuta Blu con bande gialle)
+                ctx.fillStyle = '#1e88e5';
+                ctx.fillRect(-12, -10, 24, 22);
+                ctx.fillStyle = '#ffd600';
+                ctx.fillRect(-12, 5, 24, 3);
+            }
+
+            // Braccia
+            ctx.strokeStyle = avatarType === '1' ? '#ff6f00' : (avatarType === '2' ? '#00acc1' : '#1e88e5');
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(-12, -8); ctx.lineTo(-18, 5);
+            ctx.moveTo(12, -8); ctx.lineTo(18, 5);
+            ctx.stroke();
+
+            // Testa
+            ctx.fillStyle = '#ffdbac';
+            ctx.beginPath(); ctx.arc(0, -18, 10, 0, Math.PI * 2); ctx.fill();
+
+            // Casco/Cappello in base all'Avatar
+            if (avatarType === '1') {
+                // Casco Giallo
+                ctx.fillStyle = '#ffd600';
+                ctx.beginPath(); ctx.arc(0, -22, 12, Math.PI, 0); ctx.fill();
+                ctx.fillRect(-14, -22, 28, 4);
+            } else if (avatarType === '2') {
+                // Cuffia/Cappello Azzurro
+                ctx.fillStyle = '#00bcd4';
+                ctx.beginPath(); ctx.arc(0, -21, 11, Math.PI, 0); ctx.fill();
+            } else {
+                // Casco Bianco
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath(); ctx.arc(0, -22, 12, Math.PI, 0); ctx.fill();
+                ctx.fillRect(-14, -22, 28, 4);
+            }
+
+            ctx.restore();
+        }
+
+        function drawEnvironmentBackground(env) {
+            ctx.fillStyle = '#0f141d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Pattern Griglia industriale soft
+            ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+            ctx.lineWidth = 1;
+            const step = 40;
+            for (let x = 0; x < canvas.width; x += step) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += step) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+        }
+
+        function triggerResult(isGood) {
+            const currentLvl = LEVELS[player.level - 1];
+            isLevelPassed = isGood;
+            isModalOpen = true;
+
+            const badge = document.getElementById('comic-badge');
+            const title = document.getElementById('comic-title');
+            const text = document.getElementById('comic-text');
+
+            if (isGood) {
+                badge.style.background = 'var(--success)';
+                badge.innerText = 'BEST PRACTICE APPLICATA';
+                title.innerText = 'CONFORME D.LGS 81/08';
+                text.innerText = currentLvl.goodText;
+                
+                // Aggiungi Gemma se prima volta
+                player.gems = Math.min(20, player.gems + 1);
+                document.getElementById('hud-score').innerText = `💎 ${player.gems} / 20`;
+            } else {
+                redZoneCooldown = true;
+                badge.style.background = 'var(--danger)';
+                badge.innerText = 'VIOLAZIONE NORMATIVA DETETTATA';
+                title.innerText = 'INCIDENTE / ERRORE SUL LAVORO';
+                text.innerText = currentLvl.badText;
+                player.hp = Math.max(0, player.hp - 20);
+                updateHPBar();
+            }
+
+            document.getElementById('comic-modal').style.display = 'flex';
+        }
+
+        function nextLevel() {
+            if (player.level < 20) {
+                player.level++;
+                initLevel();
+            } else {
+                isModalOpen = true;
+                document.getElementById('comic-badge').style.background = 'gold';
+                document.getElementById('comic-badge').style.color = '#000';
+                document.getElementById('comic-badge').innerText = 'ISPEZIONE COMPLETATA!';
+                document.getElementById('comic-title').innerText = 'ECCELLENTE!';
+                document.getElementById('comic-text').innerText = `Complimenti ${player.name}! Hai completato tutti i 20 settori dell'Istituto Sartori-Rosselli guadagnando ${player.gems}/20 Gemme Sicurezza 💎!`;
+                document.getElementById('comic-close-btn').innerText = 'RICOMINCIA';
+                document.getElementById('comic-close-btn').onclick = () => { location.reload(); };
+                document.getElementById('comic-modal').style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
