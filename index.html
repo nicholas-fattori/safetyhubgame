@@ -440,7 +440,7 @@
         <div class="login-overlay"></div>
         <div class="card-panel">
             <h1>SAFETY HUB</h1>
-            <div class="subtitle">Esplora l'Istituto Sartori-Rosselli e diventa il migliore</div>
+            <div class="subtitle">Esplora l'Istituto Sartori-Rosselli e scopri come proteggerlo</div>
             
             <form id="player-form">
                 <div class="form-group">
@@ -527,7 +527,7 @@
             <div class="hud-group-right">
                 <div class="hud-box">
                     <div>
-                        <div class="hud-title">SALUTE (HP)</div>
+                        <div class="hud-title">SALUTE</div>
                         <div class="health-bar-bg">
                             <div class="health-bar-fill" id="hud-hp"></div>
                         </div>
@@ -573,19 +573,19 @@
         // 20 Livelli Tematici d.lgs 81/08
         const LEVELS = [
             { id: 1, env: 'officina', name: 'Officina: Smerigliatrice', hazardType: 'sparks', badText: 'ERRORE: Hai avviato la mola senza schermi e senza occhiali protettivi! Scheggia negli occhi (-25 HP).', goodText: 'CORRETTO: Hai indossato gli occhiali DPI e abbassato il paraschegge trasparente. +1 Gemma!', gems: 1 },
-            { id: 2, env: 'officina', name: 'Officina: Manutenzione CNC', hazardType: 'movingParts', badText: 'ERRORE: Sei entrato nell area macchinario senza blocco LOTO! Avvio accidentale organo mobile (-30 HP).', goodText: 'CORRETTO: Hai applicato la procedura LOTO (Lockout/Tagout) bloccando le fonti di energia. +1 Gemma!', gems: 1 },
+            { id: 2, env: 'officina', name: 'Officina: Manutenzione CNC', hazardType: 'movingParts', badText: 'ERRORE: Sei entrato in area macchinario senza blocco LOTO! Avvio accidentale organo mobile (-30 HP).', goodText: 'CORRETTO: Hai applicato la procedura LOTO (Lockout/Tagout) bloccando le fonti di energia. +1 Gemma!', gems: 1 },
             { id: 3, env: 'officina', name: 'Officina: Tornio Meccanico', hazardType: 'sparks', badText: 'ERRORE: Bracciali e maniche larghe vicine al mandrino in rotazione! Pericolo trascinamento (-20 HP).', goodText: 'CORRETTO: Hai assicurato gli abiti da lavoro ed allacciato i manichetti a norma. +1 Gemma!', gems: 1 },
             { id: 4, env: 'officina', name: 'Officina: Pressa Oleodinamica', hazardType: 'movingParts', badText: 'ERRORE: Hai bypassato le barriere fotoelettriche di sicurezza! Rischio schiacciamento (-35 HP).', goodText: 'CORRETTO: Hai ripristinato i sensori ottici della barriera di protezione. +1 Gemma!', gems: 1 },
 
             { id: 5, env: 'elettrico', name: 'Lab Elettrico: Quadro AT', hazardType: 'arcFlash', badText: 'ERRORE: Intervento a mani nude su barre isolate! Arco elettrico imprevisto (-40 HP).', goodText: 'CORRETTO: Hai indossato guanti isolanti dielettrici Classe 0 e visiera di protezione. +1 Gemma!', gems: 1 },
-            { id: 6, env: 'elettrico', name: 'Lab Elettrico: Umidità Cabina', hazardType: 'arcFlash', badText: 'ERRORE: Camminato su ristagno d acqua vicino al trasformatore! Elettrocuzione (-30 HP).', goodText: 'CORRETTO: Hai asciugato la zona ed utilizzato pedane isolanti in gomma. +1 Gemma!', gems: 1 },
+            { id: 6, env: 'elettrico', name: 'Lab Elettrico: Umidità Cabina', hazardType: 'arcFlash', badText: 'ERRORE: Camminato su ristagno di acqua vicino al trasformatore! Elettrocuzione (-30 HP).', goodText: 'CORRETTO: Hai asciugato la zona ed utilizzato pedane isolanti in gomma. +1 Gemma!', gems: 1 },
             { id: 7, env: 'elettrico', name: 'Lab Elettrico: Cavi Scoperti', hazardType: 'sparks', badText: 'ERRORE: Presa un cavo con guarnizione in rame scoperta! Shock elettrico (-25 HP).', goodText: 'CORRETTO: Hai isolato la linea e sostituito la prolunga con connettore IP67. +1 Gemma!', gems: 1 },
-            { id: 8, env: 'elettrico', name: 'Lab Elettrico: Impianto Terra', hazardType: 'arcFlash', badText: 'ERRORE: Nodo di terra scollegato durante la misurazione! Scossa diretta (-30 HP).', goodText: 'CORRETTO: Hai riconnesso la palina di rame dell impianto di dispersione a terra. +1 Gemma!', gems: 1 },
+            { id: 8, env: 'elettrico', name: 'Lab Elettrico: Impianto Terra', hazardType: 'arcFlash', badText: 'ERRORE: Nodo di terra scollegato durante la misurazione! Scossa diretta (-30 HP).', goodText: 'CORRETTO: Palina di rame impianto di dispersione a terra riconnessa. +1 Gemma!', gems: 1 },
 
-            { id: 9, env: 'cantiere', name: 'Cantiere: Lavori in Quota', hazardType: 'debris', badText: 'ERRORE: Spostamento sul ponteggio senza linea di vita agganciata! Caduta sfiorata (-35 HP).', goodText: 'CORRETTO: Hai agganciato il doppio moschettone dell imbracatura alla linea di vita. +1 Gemma!', gems: 1 },
-            { id: 10, env: 'cantiere', name: 'Cantiere: Caduta Materiali', hazardType: 'debris', badText: 'ERRORE: Attraversata area sotto carico sospeso senza elmetto! Impatto detrito (-30 HP).', goodText: 'CORRETTO: Hai indossato l elmetto EN 397 e delimitato l area di tiro. +1 Gemma!', gems: 1 },
+            { id: 9, env: 'cantiere', name: 'Cantiere: Lavori in Quota', hazardType: 'debris', badText: 'ERRORE: Spostamento sul ponteggio senza linea di vita agganciata! Caduta sfiorata (-35 HP).', goodText: 'CORRETTO: Doppio moschettone imbracatura agganciato alla linea di vita. +1 Gemma!', gems: 1 },
+            { id: 10, env: 'cantiere', name: 'Cantiere: Caduta Materiali', hazardType: 'debris', badText: 'ERRORE: Attraversata area sotto carico sospeso senza elmetto! Impatto detrito (-30 HP).', goodText: 'CORRETTO: Elmetto EN 397 indossato e area di tiro delimitata. +1 Gemma!', gems: 1 },
             { id: 11, env: 'cantiere', name: 'Cantiere: Bordo Scavo', hazardType: 'debris', badText: 'ERRORE: Avvicinato al bordo non protetto dello scavo! Scivolamento nel vuoto (-25 HP).', goodText: 'CORRETTO: Hai installato il parapetto rigido a tre elementi con tavola fermapiede. +1 Gemma!', gems: 1 },
-            { id: 12, env: 'cantiere', name: 'Cantiere: Manovra Mezzi', hazardType: 'movingParts', badText: 'ERRORE: Camminato nell angolo cieco dello scavatore in movimento! Rischio investimento (-40 HP).', goodText: 'CORRETTO: Hai stabilito contatto visivo col manovratore e indossato gilet HV. +1 Gemma!', gems: 1 },
+            { id: 12, env: 'cantiere', name: 'Cantiere: Manovra Mezzi', hazardType: 'movingParts', badText: 'ERRORE: Camminata in angolo cieco dello scavatore in movimento! Rischio investimento (-40 HP).', goodText: 'CORRETTO: Hai stabilito contatto visivo col manovratore e indossato gilet HV. +1 Gemma!', gems: 1 },
 
             { id: 13, env: 'logistica', name: 'Magazzino: Muletto Elevatore', hazardType: 'forklift', badText: 'ERRORE: Guidato il muletto senza cintura di sicurezza! Ribaltamento laterale (-35 HP).', goodText: 'CORRETTO: Hai allacciato la cintura di trattenuta ed azionato il lampeggiante. +1 Gemma!', gems: 1 },
             { id: 14, env: 'logistica', name: 'Magazzino: Carichi Scaffali', hazardType: 'debris', badText: 'ERRORE: Prelevato scatola in basso sbilanciando bancale in quota! Crollo merce (-30 HP).', goodText: 'CORRETTO: Hai messo in sicurezza gli scaffali multilivello e filmato il pallet. +1 Gemma!', gems: 1 },
@@ -595,7 +595,7 @@
             { id: 17, env: 'chimico', name: 'Lab Chimico: Reagenti Volatili', hazardType: 'fumes', badText: 'ERRORE: Aperto flacone di solvente fuori dalla cappa! Inalazione vapori tossici (-30 HP).', goodText: 'CORRETTO: Hai attivato la cappa aspirante forzata e lavorato sotto il saliscendi. +1 Gemma!', gems: 1 },
             { id: 18, env: 'chimico', name: 'Lab Chimico: Travaso Sostanze', hazardType: 'fumes', badText: 'ERRORE: Travaso chimico senza consultare la Scheda di Sicurezza SDS! Reazione violenta (-35 HP).', goodText: 'CORRETTO: Hai verificato i pittogrammi CLP e la compatibilità dei prodotti. +1 Gemma!', gems: 1 },
             { id: 19, env: 'chimico', name: 'Lab Chimico: Bombole Gas', hazardType: 'sparks', badText: 'ERRORE: Spostata bombola d azoto sfilandola dalla catena di blocco! Rischio caduta (-25 HP).', goodText: 'CORRETTO: Hai fissato saldamente la bombola al carrello con catenella metallica. +1 Gemma!', gems: 1 },
-            { id: 20, env: 'chimico', name: 'Lab Chimico: Principio Incendio', hazardType: 'sparks', badText: 'ERRORE: Usato estintore ad acqua su quadro in tensione! Rischio folgorazione (-50 HP).', goodText: 'CORRETTO: Hai impiegato l estintore a CO2 idoneo per apparati elettrici. +1 Gemma!', gems: 1 }
+            { id: 20, env: 'chimico', name: 'Lab Chimico: Principio Incendio', hazardType: 'sparks', badText: 'ERRORE: Usato estintore ad acqua su quadro in tensione! Rischio folgorazione (-50 HP).', goodText: 'CORRETTO: Estintore a CO2 idoneo per apparati elettrici impiegato! +1 Gemma!', gems: 1 }
         ];
 
         let player = { 
