@@ -1,22 +1,9 @@
-Ecco l'anteprima interattiva aggiornata del gioco **"Safety Hero: Hazard Hunter"**.
-
-Puoi testare e giocare con l'applicazione direttamente nella finestra dell'anteprima qui sotto:
-
-safety_hero.html [generated with web_code_canvas tool]
-
----
-
-### Codice Sorgente Completo (`index.html`)
-
-Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un server della scuola:
-
-```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Hero: Hazard Hunter</title>
+    <title>Safety Hero: Hazard Hunter (Pro Ed.)</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@500;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,8 +12,8 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             --secondary: #00bcd4;
             --danger: #ff3333;
             --success: #00e676;
-            --dark: #121824;
-            --card-bg: rgba(18, 24, 36, 0.88);
+            --dark: #0d1117;
+            --card-bg: rgba(13, 17, 23, 0.92);
         }
 
         * {
@@ -44,7 +31,7 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             height: 100vh;
         }
 
-        /* SCHERMATA LOGIN CON SFONDO SCUOLA FULL-SCREEN */
+        /* LOGIN SCREEN WITH FULL-SCREEN SCHOOL */
         #login-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -52,7 +39,7 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             justify-content: center;
             align-items: center;
             z-index: 100;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%237ec0ee"/><rect y="400" width="1200" height="200" fill="%23d8d0c5"/><rect x="150" y="150" width="900" height="250" fill="%23f9f6f0" stroke="%23333" stroke-width="4"/><polygon points="150,150 600,40 1050,150" fill="%23b84a39"/><rect x="450" y="70" width="300" height="80" fill="%23eee8dc" stroke="%23333" stroke-width="3"/><polygon points="450,70 600,25 750,70" fill="%238b0000"/><g fill="%231c3144"><rect x="200" y="190" width="50" height="80"/><rect x="290" y="190" width="50" height="80"/><rect x="380" y="190" width="50" height="80"/><rect x="480" y="180" width="60" height="90"/><rect x="660" y="180" width="60" height="90"/><rect x="770" y="190" width="50" height="80"/><rect x="860" y="190" width="50" height="80"/><rect x="950" y="190" width="50" height="80"/></g><g fill="%23ffffff" stroke="%23ccc" stroke-width="2"><rect x="170" y="300" width="220" height="100"/><rect x="810" y="300" width="220" height="100"/></g><rect x="540" y="290" width="120" height="110" fill="%235c4033"/><line x1="600" y1="120" x2="600" y2="40" stroke="%23333" stroke-width="4"/><rect x="600" y="40" width="30" height="15" fill="%23green"/><rect x="600" y="55" width="30" height="15" fill="%23white"/><rect x="600" y="70" width="30" height="15" fill="%23red"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%236ba4b8"/><rect y="380" width="1200" height="220" fill="%23c5beaf"/><rect x="120" y="140" width="960" height="260" fill="%23f3efe6" stroke="%23222" stroke-width="5"/><polygon points="120,140 600,30 1080,140" fill="%239e3b2b"/><rect x="440" y="60" width="320" height="80" fill="%23e5dec9" stroke="%23222" stroke-width="4"/><polygon points="440,60 600,15 760,60" fill="%236e1a1a"/><g fill="%231a2634"><rect x="170" y="180" width="60" height="90"/><rect x="270" y="180" width="60" height="90"/><rect x="370" y="180" width="60" height="90"/><rect x="470" y="170" width="70" height="100"/><rect x="660" y="170" width="70" height="100"/><rect x="770" y="180" width="60" height="90"/><rect x="870" y="180" width="60" height="90"/><rect x="970" y="180" width="60" height="90"/></g><g fill="%23ffffff" stroke="%23bbb" stroke-width="3"><rect x="180" y="290" width="220" height="110"/><rect x="800" y="290" width="220" height="110"/></g><rect x="535" y="270" width="130" height="130" fill="%234a3326"/><line x1="600" y1="110" x2="600" y2="30" stroke="%23222" stroke-width="4"/><rect x="600" y="30" width="35" height="15" fill="%23009246"/><rect x="600" y="45" width="35" height="15" fill="%23ffffff"/><rect x="600" y="60" width="35" height="15" fill="%23ce2b37"/></svg>');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -61,8 +48,8 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
         .login-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 15, 26, 0.65);
-            backdrop-filter: blur(5px);
+            background: rgba(10, 15, 26, 0.75);
+            backdrop-filter: blur(8px);
         }
 
         .card-panel {
@@ -71,10 +58,10 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             background: var(--card-bg);
             border: 2px solid var(--primary);
             border-radius: 16px;
-            padding: 30px;
+            padding: 35px;
             width: 90%;
-            max-width: 480px;
-            box-shadow: 0 0 30px rgba(255, 153, 0, 0.35);
+            max-width: 500px;
+            box-shadow: 0 0 35px rgba(255, 153, 0, 0.4);
             text-align: center;
         }
 
@@ -82,9 +69,10 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             font-family: 'Orbitron', sans-serif;
             color: var(--primary);
             text-transform: uppercase;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(255, 153, 0, 0.6);
         }
 
         .subtitle {
@@ -102,14 +90,14 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             display: block;
             font-size: 0.85rem;
             color: var(--secondary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        input, select {
+        input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
@@ -118,9 +106,9 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             outline: none;
         }
 
-        input:focus, select:focus {
+        input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
         }
 
         .avatar-selector {
@@ -130,24 +118,29 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
         }
 
         .avatar-option {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             border: 3px solid transparent;
             cursor: pointer;
-            background-size: cover;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #000;
         }
 
         .avatar-option.selected {
             border-color: var(--primary);
             transform: scale(1.15);
-            box-shadow: 0 0 12px var(--primary);
+            box-shadow: 0 0 15px var(--primary);
         }
 
         .btn-main {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: linear-gradient(45deg, var(--primary-dark), var(--primary));
             border: none;
             border-radius: 8px;
@@ -164,10 +157,10 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
 
         .btn-main:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.5);
         }
 
-        /* GAME HUD & INTERFACE */
+        /* GAME HUD */
         #game-container {
             display: none;
             width: 100vw;
@@ -194,7 +187,7 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
         }
 
         .hud-box {
-            background: rgba(18, 24, 36, 0.85);
+            background: rgba(13, 17, 23, 0.88);
             border: 1px solid var(--primary);
             padding: 10px 18px;
             border-radius: 10px;
@@ -202,26 +195,42 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             pointer-events: auto;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .hud-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #888;
         }
 
         .hud-val {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #fff;
         }
 
-        /* FUMETTO DIALOGO */
+        .health-bar-bg {
+            width: 120px;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 3px;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        /* COMIC MODAL */
         .comic-modal {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.82);
             display: none;
             justify-content: center;
             align-items: center;
@@ -233,7 +242,7 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             background: #fff;
             color: #111;
             width: 100%;
-            max-width: 550px;
+            max-width: 580px;
             border-radius: 20px;
             border: 6px solid #000;
             padding: 25px;
@@ -249,12 +258,9 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
 
         .comic-header {
             font-family: 'Bangers', cursive;
-            font-size: 2rem;
+            font-size: 2.1rem;
             letter-spacing: 1px;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .comic-body {
@@ -267,8 +273,8 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             display: inline-block;
             background: #111;
             color: #fff;
-            font-size: 0.75rem;
-            padding: 4px 10px;
+            font-size: 0.8rem;
+            padding: 4px 12px;
             border-radius: 4px;
             font-weight: bold;
             margin-bottom: 10px;
@@ -294,7 +300,7 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             color: #000;
         }
 
-        /* CONTROLLI MOBILE TOUCH */
+        /* TOUCH CONTROLS */
         .touch-controls {
             position: absolute;
             bottom: 20px;
@@ -357,51 +363,59 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
 </head>
 <body>
 
-    <!-- SCHERMATA LOGIN CON SFONDO SCUOLA FULL-SCREEN -->
+    <!-- SCHERMATA LOGIN -->
     <div id="login-screen">
         <div class="login-overlay"></div>
         <div class="card-panel">
             <h1>SAFETY HERO</h1>
-            <div class="subtitle">Simulatore di Sicurezza sul Lavoro per Studenti</div>
+            <div class="subtitle">Simulatore di Prevenzione Rischi (D.Lgs 81/08)</div>
             
             <form id="player-form">
                 <div class="form-group">
-                    <label>Nome Studente / Giocatore</label>
-                    <input type="text" id="player-name" required placeholder="Es. Mario Rossi">
+                    <label>Nome Operatore / Studente</label>
+                    <input type="text" id="player-name" required placeholder="Inserisci il tuo nome">
                 </div>
 
                 <div class="form-group">
-                    <label>Seleziona Avatar</label>
+                    <label>Seleziona Ruolo & Avatar</label>
                     <div class="avatar-selector">
-                        <div class="avatar-option selected" data-avatar="1" style="background:#00bcd4;"></div>
-                        <div class="avatar-option" data-avatar="2" style="background:#e91e63;"></div>
-                        <div class="avatar-option" data-avatar="3" style="background:#4caf50;"></div>
+                        <div class="avatar-option selected" data-avatar="1" style="background:#ff9900;">TECNICO</div>
+                        <div class="avatar-option" data-avatar="2" style="background:#00bcd4;">INGEGNERI</div>
+                        <div class="avatar-option" data-avatar="3" style="background:#e91e63;">RSPP</div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-main">ENTRA NEL CANTIERE</button>
+                <button type="submit" class="btn-main">INIZIA ISPEZIONE</button>
             </form>
         </div>
     </div>
 
-    <!-- CANVAS DI GIOCO 2D -->
+    <!-- CANVAS E GIOCO -->
     <div id="game-container">
         <div class="hud-top">
             <div class="hud-box">
                 <div>
-                    <div class="hud-title">STUDENTE</div>
+                    <div class="hud-title">OPERATORE</div>
                     <div class="hud-val" id="hud-name">Player</div>
                 </div>
             </div>
             <div class="hud-box">
                 <div>
-                    <div class="hud-title">LIVELLO</div>
+                    <div class="hud-title">SALUTE (HP)</div>
+                    <div class="health-bar-bg">
+                        <div class="health-bar-fill" id="hud-hp"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hud-box">
+                <div>
+                    <div class="hud-title">SETTORE</div>
                     <div class="hud-val" id="hud-level">1 / 20</div>
                 </div>
             </div>
             <div class="hud-box">
                 <div>
-                    <div class="hud-title">PUNTEGGIO</div>
+                    <div class="hud-title">XP SICUREZZA</div>
                     <div class="hud-val" id="hud-score">0 XP</div>
                 </div>
             </div>
@@ -409,7 +423,6 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
 
         <canvas id="gameCanvas"></canvas>
 
-        <!-- CONTROLLI MOBILE TOUCH -->
         <div class="touch-controls">
             <div class="d-pad">
                 <div class="d-btn d-up" id="btn-up">▲</div>
@@ -421,49 +434,51 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
         </div>
     </div>
 
-    <!-- MODALE FUMETTO RISCHI ED ERRORI -->
+    <!-- MODALE FUMETTO -->
     <div class="comic-modal" id="comic-modal">
         <div class="comic-box">
-            <div class="comic-badge" id="comic-badge">INCIDENTE D.LGS 81/08</div>
-            <div class="comic-header" id="comic-title">TITOLO PERICOLO</div>
+            <div class="comic-badge" id="comic-badge">VALUTAZIONE RISCHIO</div>
+            <div class="comic-header" id="comic-title">TITOLO ESITO</div>
             <div class="comic-body" id="comic-text">
-                Spiegazione dell'errore umano o della procedura di sicurezza corretta...
+                Descrizione dell'errore o della best practice applicata...
             </div>
-            <button class="comic-btn" id="comic-close-btn">HO CAPITO!</button>
+            <button class="comic-btn" id="comic-close-btn">CONTINUA ISPEZIONE</button>
         </div>
     </div>
 
     <script>
         const LEVELS = [
-            { id: 1, env: 'officina', title: 'Mola da Banco & Protezioni', target: 'Mola Senza Schermo', choice: 'Indossa Occhiali DPI e attiva lo schermo protettivo', xp: 100, hazard: 'Schegge negli occhi e contatto improprio con organo rotante.' },
-            { id: 2, env: 'officina', title: 'Procedura LOTO su Monoblocco', target: 'Fresatrice CNC in Tensione', choice: 'Applica il blocco LOTO (Lockout/Tagout)', xp: 100, hazard: 'Avvio accidentale del macchinario durante la manutenzione.' },
-            { id: 3, env: 'officina', title: 'Abbigliamento da Lavoro', target: 'Tornio Meccanico', choice: 'Raccogli i capelli e chiudi le maniche ampie', xp: 100, hazard: 'Impigliamento degli abiti nell organo di trasmissione.' },
-            { id: 4, env: 'officina', title: 'Fotocellule della Pressa', target: 'Barriera Ottica Disattivata', choice: 'Ripristina il funzionamento delle fotocellule', xp: 100, hazard: 'Schiacciamento e amputazione degli arti superiori.' },
+            { id: 1, env: 'officina', title: 'Smerigliatrice da Banco', hazardType: 'sparks', badText: 'Hai avviato la mola senza schermi e senza occhiali protettivi! Scheggia negli occhi (-25 HP).', goodText: 'Hai indossato gli occhiali DPI e abbassato il paraschegge trasparente. Area sicura!', xp: 100 },
+            { id: 2, env: 'officina', title: 'Manutenzione CNC', hazardType: 'movingParts', badText: 'Sei entrato nell area macchinario senza blocco LOTO! Avvio accidentale organo mobile (-30 HP).', goodText: 'Hai applicato la procedura LOTO (Lockout/Tagout) bloccando le fonti di energia.', xp: 100 },
+            { id: 3, env: 'officina', title: 'Lavorazione al Tornio', hazardType: 'sparks', badText: 'Bracciali e maniche larghe vicine all mandrino in rotazione! Pericolo trascinamento (-20 HP).', goodText: 'Hai assicurato gli abiti da lavoro ed allacciato i manichetti a norma.', xp: 100 },
+            { id: 4, env: 'officina', title: 'Pressa Oleodinamica', hazardType: 'movingParts', badText: 'Hai bypassato le barriere fotoelettriche di sicurezza! Rischio schiacciamento (-35 HP).', goodText: 'Hai ripristinato i sensori ottici della barriera di protezione.', xp: 100 },
 
-            { id: 5, env: 'elettrico', title: 'Arc Flash & Guanti Isolanti', target: 'Quadri ad Alta Tensione', choice: 'Indossa guanti dielettrici isolanti di Classe 00', xp: 120, hazard: 'Fiammata da arco elettrico ed ustioni da fulminazione.' },
-            { id: 6, env: 'elettrico', title: 'Conduttività Liquidi', target: 'Chiazza d Acqua a Terra', choice: 'Elimina l umidità prima di accedere alle barre', xp: 120, hazard: 'Elettrocuzione diretta dovuta alla conduzione dell acqua.' },
-            { id: 7, env: 'elettrico', title: 'Cavi Sfilacciati', target: 'Prolunga Cantiere Danneggiata', choice: 'Sostituisci il cavo con connettore IP67 a norma', xp: 120, hazard: 'Contatto indiretto con rame in tensione.' },
-            { id: 8, env: 'elettrico', title: 'Messa a Terra Impianto', target: 'Dispersore Scollegato', choice: 'Riconnetti il cavo giallo-verde di terra', xp: 120, hazard: 'Mancata dispersione delle correnti di guasto verso terra.' },
+            { id: 5, env: 'elettrico', title: 'Quadro Alta Tensione', hazardType: 'arcFlash', badText: 'Intervento a mani nude su barre isolate! Arco elettrico imprevisto (-40 HP).', goodText: 'Hai indossato guanti isolanti dielettrici Classe 0 e visiera di protezione.', xp: 120 },
+            { id: 6, env: 'elettrico', title: 'Umidità in Cabina', hazardType: 'arcFlash', badText: 'Camminato su ristagno d acqua vicino al trasformatore! Elettrocuzione (-30 HP).', goodText: 'Hai asciugato la zona ed utilizzato pedane isolanti in gomma.', xp: 120 },
+            { id: 7, env: 'elettrico', title: 'Cavi Sfilacciati', hazardType: 'sparks', badText: 'Presa un cavo con guarnizione in rame scoperta! Shock elettrico (-25 HP).', goodText: 'Hai isolato la linea e sostituito la prolunga con connettore IP67.', xp: 120 },
+            { id: 8, env: 'elettrico', title: 'Impianto di Terra', hazardType: 'arcFlash', badText: 'Nodo di terra scollegato durante la misurazione! Scossa diretta (-30 HP).', goodText: 'Hai riconnesso la palina di rame dell impianto di dispersione a terra.', xp: 120 },
 
-            { id: 9, env: 'cantiere', title: 'Lavori in Quota & Linea Vita', target: 'Struttura Ponteggio', choice: 'Aggancia il moschettone dell imbracatura alla linea di vita', xp: 150, hazard: 'Caduta da quota superiore a 2 metri senza protezione.' },
-            { id: 10, env: 'cantiere', title: 'Caduta Oggetti dall Alto', target: 'Zona Sottostante ai Piani', choice: 'Indossa l elmetto protettivo EN 397', xp: 150, hazard: 'Trauma cranico per impatto con materiali o attrezzi caduti.' },
-            { id: 11, env: 'cantiere', title: 'Parapetti e Fermapiede', target: 'Bordo Sovraelevato Scuoperto', choice: 'Monta il parapetto regolamentare a tre elementi', xp: 150, hazard: 'Scivolamento e caduta nel vuoto.' },
-            { id: 12, env: 'cantiere', title: 'Manovra Mezzi Pesanti', target: 'Zona Scavo Scavatore', choice: 'Mantieni il contatto visivo con il manovratore', xp: 150, hazard: 'Investimento e schiacciamento negli angoli ciechi dei mezzi.' },
+            { id: 9, env: 'cantiere', title: 'Lavori in Quota (>2m)', hazardType: 'debris', badText: 'Spostamento sul ponteggio senza linea di vita agganciata! Caduta sfiorata (-35 HP).', goodText: 'Hai agganciato il doppio moschettone dell imbracatura alla linea di vita.', xp: 150 },
+            { id: 10, env: 'cantiere', title: 'Caduta Materiali', hazardType: 'debris', badText: 'Attraversata area sotto carico sospeso senza elmetto! Impatto detrito (-30 HP).', goodText: 'Hai indossato l elmetto EN 397 e delimitato l area di tiro.', xp: 150 },
+            { id: 11, env: 'cantiere', title: 'Bordo Scavo', hazardType: 'debris', badText: 'Avvicinato al bordo non protetto dello scavo! Scivolamento nel vuoto (-25 HP).', goodText: 'Hai installato il parapetto rigido a tre elementi con tavola fermapiede.', xp: 150 },
+            { id: 12, env: 'cantiere', title: 'Zona Manovra Mezzi', hazardType: 'movingParts', badText: 'Camminato nell angolo cieco dello scavatore in movimento! Rischio investimento (-40 HP).', goodText: 'Hai stabilito contatto visivo col manovratore e indossato gilet HV.', xp: 150 },
 
-            { id: 13, env: 'logistica', title: 'Cintura su Carrello Elevatore', target: 'Posto Guida Muletto', choice: 'Allaccia la cintura di sicurezza anti-ribaltamento', xp: 130, hazard: 'Schiacciamento sotto il muletto in caso di sbilanciamento.' },
-            { id: 14, env: 'logistica', title: 'Stoccaggio Pallet Instabili', target: 'Scaffalature Magazzino', choice: 'Risistema il carico e stabilizza i bancali in alto', xp: 130, hazard: 'Crollo delle merci sulle corsie di passaggio.' },
-            { id: 15, env: 'logistica', title: 'Ergonomia Carichi (MMC)', target: 'Pacco Pesante a Terra', choice: 'Piega le ginocchia e mantieni il carico vicino al busto', xp: 130, hazard: 'Lesioni dorsolombari e discopatie acuto-croniche.' },
-            { id: 16, env: 'logistica', title: 'Uscite di Emergenza', target: 'Porta di Evacuazione', choice: 'Sgombra le scatole dalla via di fuga', xp: 130, hazard: 'Ostacolo e blocco durante l evacuazione d emergenza.' },
+            { id: 13, env: 'logistica', title: 'Guida Carrello Elevatore', hazardType: 'forklift', badText: 'Guidato il muletto senza cintura di sicurezza! Ribaltamento laterale (-35 HP).', goodText: 'Hai allacciato la cintura di trattenuta ed azionato il lampeggiante.', xp: 130 },
+            { id: 14, env: 'logistica', title: 'Carichi Instabili', hazardType: 'debris', badText: 'Prelevato scatola in basso sbilanciando bancale in quota! Crollo merce (-30 HP).', goodText: 'Hai messo in sicurezza gli scaffali multilivello e filmato il pallet.', xp: 130 },
+            { id: 15, env: 'logistica', title: 'Sollevamento Manuale (MMC)', hazardType: 'movingParts', badText: 'Sollevato carico da 30kg a schiena curva! Trauma alla colonna (-20 HP).', goodText: 'Hai piegato le ginocchia mantenendo il peso vicino al baricentro.', xp: 130 },
+            { id: 16, env: 'logistica', title: 'Uscita d Emergenza', hazardType: 'forklift', badText: 'Accumulato bancali davanti alla porta antincendio! Blocco via di fuga (-25 HP).', goodText: 'Hai rimosso ogni ostacolo liberando la porta ad apertura a spinta.', xp: 130 },
 
-            { id: 17, env: 'chimico', title: 'Cappa Aspirazione Fumi', target: 'Postazione Reagenti Volatili', choice: 'Attiva la cappa d aspirazione forzata', xp: 140, hazard: 'Inalazione di sostanze tossiche o nocive.' },
-            { id: 18, env: 'chimico', title: 'Schedes di Sicurezza (SDS)', target: 'Flacone Privo di Pittogrammi', choice: 'Consulta la SDS per verificare la reattività chimica', xp: 140, hazard: 'Reazioni esotermiche ed incompatibilità chimiche violente.' },
-            { id: 19, env: 'chimico', title: 'Bombole Gas Compressi', target: 'Bombola d Azoto Libera', choice: 'Fissa la bombola con la catena al carrello metallico', xp: 140, hazard: 'Rottura valvola ed effetto missile ad alta pressione.' },
-            { id: 20, env: 'chimico', title: 'Estintore Idoneo su Elettrico', target: 'Incendio su Quadro Elettrico', choice: 'Utilizza l estintore a CO2 (Diossido di Carbonio)', xp: 200, hazard: 'Elettrocuzione da conducibilità impiegando estintori ad acqua.' }
+            { id: 17, env: 'chimico', title: 'Reagenti Volatili', hazardType: 'fumes', badText: 'Aperto flacone di solvente fuori dalla cappa! Inalazione vapori tossici (-30 HP).', goodText: 'Hai attivato la cappa aspirante forzata e lavorato sotto il saliscendi.', xp: 140 },
+            { id: 18, env: 'chimico', title: 'Miscelazione Sostanze', hazardType: 'fumes', badText: 'Travaso chimico senza consultare la Scheda di Sicurezza SDS! Reazione violenta (-35 HP).', goodText: 'Hai verificato i pittogrammi CLP e la compatibilità dei prodotti.', xp: 140 },
+            { id: 19, env: 'chimico', title: 'Gas Compressi', hazardType: 'sparks', badText: 'Spostata bombola d azoto sfilandola dalla catena di blocco! Rischio caduta (-25 HP).', goodText: 'Hai fissato saldamente la bombola al carrello con catenella metallica.', xp: 140 },
+            { id: 20, env: 'chimico', title: 'Principio d Incendio', hazardType: 'sparks', badText: 'Usato estintore ad acqua su quadro in tensione! Rischio folgorazione (-50 HP).', goodText: 'Hai impiegato l estintore a CO2 (Anidride Carbonica) idoneo per apparati elettrici.', xp: 200 }
         ];
 
-        let player = { name: '', avatar: 1, x: 200, y: 300, level: 1, score: 0, dir: 'down' };
+        let player = { name: '', avatar: 1, x: 200, y: 300, level: 1, score: 0, hp: 100, dir: 'down', animFrame: 0 };
         let keys = {};
+        let projectiles = [];
         let canvas, ctx;
+        let isLevelPassed = false;
 
         window.onload = () => {
             canvas = document.getElementById('gameCanvas');
@@ -484,16 +499,19 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
 
             document.getElementById('player-form').addEventListener('submit', (e) => {
                 e.preventDefault();
-                player.name = document.getElementById('player-name').value || 'Studente';
+                player.name = document.getElementById('player-name').value || 'Operatore';
                 document.getElementById('hud-name').innerText = player.name;
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('game-container').style.display = 'block';
+                initLevel();
                 gameLoop();
             });
 
             document.getElementById('comic-close-btn').addEventListener('click', () => {
                 document.getElementById('comic-modal').style.display = 'none';
-                nextLevel();
+                if (isLevelPassed) {
+                    nextLevel();
+                }
             });
         };
 
@@ -504,6 +522,24 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
             }
         }
 
+        function initLevel() {
+            isLevelPassed = false;
+            projectiles = [];
+            player.x = 120;
+            player.y = canvas.height / 2;
+
+            const lvl = LEVELS[player.level - 1];
+            for (let i = 0; i < 4; i++) {
+                projectiles.push({
+                    x: Math.random() * (canvas.width - 300) + 200,
+                    y: Math.random() * (canvas.height - 200) + 100,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    type: lvl.hazardType
+                });
+            }
+        }
+
         function gameLoop() {
             update();
             render();
@@ -511,123 +547,216 @@ Se desideri salvare il codice sul tuo computer per eseguirlo offline o su un ser
         }
 
         function update() {
-            const speed = 5;
-            if (keys['ArrowUp'] || keys['w'] || keys['W']) { player.y -= speed; player.dir = 'up'; }
-            if (keys['ArrowDown'] || keys['s'] || keys['S']) { player.y += speed; player.dir = 'down'; }
-            if (keys['ArrowLeft'] || keys['a'] || keys['A']) { player.x -= speed; player.dir = 'left'; }
-            if (keys['ArrowRight'] || keys['d'] || keys['D']) { player.x += speed; player.dir = 'right'; }
+            let moving = false;
+            const speed = 4.5;
+
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) { player.y -= speed; player.dir = 'up'; moving = true; }
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) { player.y += speed; player.dir = 'down'; moving = true; }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) { player.x -= speed; player.dir = 'left'; moving = true; }
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) { player.x += speed; player.dir = 'right'; moving = true; }
+
+            if (moving) player.animFrame += 0.2;
 
             player.x = Math.max(50, Math.min(canvas.width - 50, player.x));
-            player.y = Math.max(50, Math.min(canvas.height - 50, player.y));
+            player.y = Math.max(80, Math.min(canvas.height - 50, player.y));
 
-            const targetX = canvas.width / 2;
+            // Collisioni Proiettili/Pericoli
+            projectiles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 100 || p.x > canvas.width - 100) p.vx *= -1;
+                if (p.y < 100 || p.y > canvas.height - 100) p.vy *= -1;
+
+                const dist = Math.hypot(player.x - p.x, player.y - p.y);
+                if (dist < 25) {
+                    player.hp = Math.max(0, player.hp - 0.5);
+                    updateHPBar();
+                }
+            });
+
+            // Target Points
+            const badTargetX = canvas.width / 2 - 120;
+            const goodTargetX = canvas.width / 2 + 120;
             const targetY = canvas.height / 2;
-            const dist = Math.hypot(player.x - targetX, player.y - targetY);
 
-            if ((dist < 60 && keys[' ']) || (dist < 60 && keys['e'])) {
-                triggerInteraction();
+            const distBad = Math.hypot(player.x - badTargetX, player.y - targetY);
+            const distGood = Math.hypot(player.x - goodTargetX, player.y - targetY);
+
+            if ((distBad < 40 && keys[' ']) || (distBad < 40 && keys['e'])) {
+                triggerResult(false);
+            } else if ((distGood < 40 && keys[' ']) || (distGood < 40 && keys['e'])) {
+                triggerResult(true);
             }
+        }
+
+        function updateHPBar() {
+            const bar = document.getElementById('hud-hp');
+            bar.style.width = player.hp + '%';
+            if (player.hp < 30) bar.style.background = 'var(--danger)';
+            else if (player.hp < 60) bar.style.background = 'var(--primary)';
+            else bar.style.background = 'var(--success)';
         }
 
         function render() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const currentLvl = LEVELS[player.level - 1];
 
-            drawEnvironment(currentLvl.env);
+            drawDetailedEnvironment(currentLvl.env);
 
-            const targetX = canvas.width / 2;
+            projectiles.forEach(p => drawHazardProjectile(p));
+
+            const badTargetX = canvas.width / 2 - 120;
+            const goodTargetX = canvas.width / 2 + 120;
             const targetY = canvas.height / 2;
 
+            // Target Rosso
+            drawInteractPoint(badTargetX, targetY, '#ff3333', '🔴 PRATICA PERICOLOSA');
+            // Target Verde
+            drawInteractPoint(goodTargetX, targetY, '#00e676', '🟢 BEST PRACTICE (D.Lgs 81/08)');
+
+            drawRealisticPlayer(player.x, player.y, player.dir, player.animFrame);
+        }
+
+        function drawInteractPoint(x, y, color, label) {
             ctx.save();
             ctx.beginPath();
-            ctx.arc(targetX, targetY, 45 + Math.sin(Date.now() / 150) * 5, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 153, 0, 0.35)';
+            ctx.arc(x, y, 28 + Math.sin(Date.now() / 200) * 4, 0, Math.PI * 2);
+            ctx.fillStyle = color + '33';
             ctx.fill();
-            ctx.strokeStyle = '#ff9900';
+            ctx.strokeStyle = color;
             ctx.lineWidth = 4;
             ctx.stroke();
 
+            ctx.beginPath();
+            ctx.arc(x, y, 12, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+
             ctx.fillStyle = '#fff';
-            ctx.font = 'bold 16px Orbitron';
+            ctx.font = 'bold 13px Orbitron';
             ctx.textAlign = 'center';
-            ctx.fillText(currentLvl.target, targetX, targetY - 60);
-            ctx.fillText("PREMI SPAZIO PER INTERAGIRE", targetX, targetY + 75);
+            ctx.fillText(label, x, y - 40);
+            ctx.font = '11px Roboto';
+            ctx.fillText('PREMI SPAZIO', x, y + 45);
             ctx.restore();
-
-            drawPlayer(player.x, player.y, player.dir);
         }
 
-        function drawEnvironment(env) {
-            ctx.fillStyle = '#1c2430';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-            ctx.lineWidth = 2;
-            for (let x = 0; x < canvas.width; x += 60) {
-                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        function drawHazardProjectile(p) {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            if (p.type === 'sparks') {
+                ctx.fillStyle = '#ff9900';
+                ctx.beginPath(); ctx.arc(0, 0, 8, 0, Math.PI * 2); ctx.fill();
+            } else if (p.type === 'arcFlash') {
+                ctx.fillStyle = '#00bcd4';
+                ctx.beginPath(); ctx.arc(0, 0, 10, 0, Math.PI * 2); ctx.fill();
+            } else if (p.type === 'fumes') {
+                ctx.fillStyle = 'rgba(156, 39, 176, 0.6)';
+                ctx.beginPath(); ctx.arc(0, 0, 15, 0, Math.PI * 2); ctx.fill();
+            } else {
+                ctx.fillStyle = '#ff5722';
+                ctx.fillRect(-8, -8, 16, 16);
             }
-            for (let y = 0; y < canvas.height; y += 60) {
-                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-            }
+            ctx.restore();
         }
 
-        function drawPlayer(x, y, dir) {
+        function drawRealisticPlayer(x, y, dir, anim) {
             ctx.save();
             ctx.translate(x, y);
 
+            // Ombra
             ctx.beginPath();
-            ctx.ellipse(0, 22, 18, 8, 0, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.ellipse(0, 32, 16, 6, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.45)';
             ctx.fill();
 
-            ctx.fillStyle = player.avatar == 1 ? '#00bcd4' : (player.avatar == 2 ? '#e91e63' : '#4caf50');
+            // Gambe amimate
+            const legOffset = Math.sin(anim) * 8;
+            ctx.strokeStyle = '#1a237e';
+            ctx.lineWidth = 6;
             ctx.beginPath();
-            ctx.arc(0, 0, 18, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 3;
+            ctx.moveTo(-5, 10); ctx.lineTo(-5 + legOffset, 30);
+            ctx.moveTo(5, 10); ctx.lineTo(5 - legOffset, 30);
             ctx.stroke();
 
-            ctx.fillStyle = '#ffcc00';
+            // Busto / Gilet Catarifrangente
+            ctx.fillStyle = '#ff6f00';
+            ctx.fillRect(-12, -10, 24, 22);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-12, -4, 24, 4);
+
+            // Braccia
+            ctx.strokeStyle = '#ff6f00';
+            ctx.lineWidth = 5;
             ctx.beginPath();
-            ctx.arc(0, -2, 13, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.moveTo(-12, -8); ctx.lineTo(-18, 5);
+            ctx.moveTo(12, -8); ctx.lineTo(18, 5);
             ctx.stroke();
 
-            ctx.fillStyle = '#000';
-            if (dir === 'up') ctx.fillRect(-4, -12, 8, 4);
-            if (dir === 'down') ctx.fillRect(-4, 4, 8, 4);
-            if (dir === 'left') ctx.fillRect(-12, -4, 4, 8);
-            if (dir === 'right') ctx.fillRect(8, -4, 4, 8);
+            // Testa
+            ctx.fillStyle = '#ffdbac';
+            ctx.beginPath(); ctx.arc(0, -18, 10, 0, Math.PI * 2); ctx.fill();
+
+            // Caschetto
+            ctx.fillStyle = '#ffd600';
+            ctx.beginPath();
+            ctx.arc(0, -22, 12, Math.PI, 0);
+            ctx.fill();
+            ctx.fillRect(-14, -22, 28, 4);
 
             ctx.restore();
         }
 
-        function triggerInteraction() {
+        function drawDetailedEnvironment(env) {
+            ctx.fillStyle = '#141a24';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.03)';
+            ctx.fillRect(0, 0, canvas.width, 70);
+
+            ctx.font = 'bold 22px Orbitron';
+            ctx.fillStyle = '#ff9900';
+            ctx.textAlign = 'left';
+            ctx.fillText(`SETTORE: ${env.toUpperCase()}`, 30, 45);
+        }
+
+        function triggerResult(isGood) {
             const currentLvl = LEVELS[player.level - 1];
-            document.getElementById('comic-title').innerText = currentLvl.title;
-            document.getElementById('comic-text').innerHTML = `
-                <strong>PERICOLO IDENTIFICATO:</strong> ${currentLvl.hazard}<br><br>
-                <strong>AZIONI DI SICUREZZA:</strong> ${currentLvl.choice}<br><br>
-                <em>Conforme alle direttive D.Lgs 81/08 sulla prevenzione negli ambienti di lavoro.</em>
-            `;
+            isLevelPassed = isGood;
+
+            const badge = document.getElementById('comic-badge');
+            const title = document.getElementById('comic-title');
+            const text = document.getElementById('comic-text');
+
+            if (isGood) {
+                badge.style.background = 'var(--success)';
+                badge.innerText = 'BEST PRACTICE APPLICATA';
+                title.innerText = 'CONFORME D.LGS 81/08';
+                text.innerText = currentLvl.goodText;
+                player.score += currentLvl.xp;
+            } else {
+                badge.style.background = 'var(--danger)';
+                badge.innerText = 'VIOLAZIONE NORMATIVA';
+                title.innerText = 'INCIDENTE SUL LAVORO';
+                text.innerText = currentLvl.badText;
+                player.hp = Math.max(0, player.hp - 20);
+                updateHPBar();
+            }
+
+            document.getElementById('hud-score').innerText = player.score + ' XP';
             document.getElementById('comic-modal').style.display = 'flex';
         }
 
         function nextLevel() {
-            player.score += LEVELS[player.level - 1].xp;
-            document.getElementById('hud-score').innerText = player.score + ' XP';
-
             if (player.level < 20) {
                 player.level++;
                 document.getElementById('hud-level').innerText = player.level + ' / 20';
-                player.x = 120;
-                player.y = 120;
+                initLevel();
             } else {
-                alert(`COMPLIMENTI ${player.name}! Hai completato con successo tutti i 20 livelli di sicurezza! Score Finale: ${player.score} XP`);
+                alert(`ISPEZIONE ULTIMATA! ${player.name}, hai totalizzato ${player.score} XP! Salute residua: ${player.hp}%`);
             }
         }
     </script>
 </body>
 </html>
-
-```
